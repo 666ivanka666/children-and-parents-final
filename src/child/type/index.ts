@@ -1,8 +1,8 @@
 export class Child {
   constructor(
     public id: string,
-    public firstname: string,
-    public lastname: string,
+    public firstName: string,
+    public lastName: string,
     public partentId: string,
   ) {}
 }

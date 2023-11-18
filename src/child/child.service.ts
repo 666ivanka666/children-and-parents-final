@@ -3,20 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { Child } from './type';
 import { ParentService } from 'src/parent/parent.service';
 
-
 @Injectable()
 export class ChildService {
   private child: Child[] = [];
-  childIndex: number;
 
-  insertChild(
-    firstname: string,
-    lastname: string,
-    parentId: string,
-  ): string {
+  insertChild(firstName: string, lastName: string, parentId: string): string {
     const childId = uuidv4();
-    this.child.push(new Child(childId, firstname, lastname, parentId)
-    );
+    this.child.push(new Child(childId, firstName, lastName, parentId));
     return childId;
   }
 
@@ -31,21 +24,20 @@ export class ChildService {
 
   updateChild(
     childId: string,
-    firstname: string,
-    lastname: string,
+    firstName: string,
+    lastName: string,
     parentId: string,
-  ): Child{
+  ): Child {
     const [child, index] = this.findChild(childId);
 
-    if (firstname) {
-      child.firstname = firstname;
+    if (firstName) {
+      child.firstName = firstName;
     }
-    if (lastname) {
-      child.lastname = lastname;
-
+    if (lastName) {
+      child.lastName = lastName;
     }
     if (parentId) {
-      child.parentId = parentId;
+      child.partentId = parentId;
     }
 
     return child;
@@ -57,12 +49,11 @@ export class ChildService {
     return { message: 'Uspjesno obrisano' };
   }
 
-
   findChild(id: string): [Child, number] {
     const childIndex = this.child.findIndex((child) => child.id === id);
     if (childIndex === -1) {
       throw new NotFoundException(`Child with ID ${id} not found`);
     }
-    return [this.child[this.childIndex],this.childIndex];
+    return [this.child[childIndex], childIndex];
   }
 }
